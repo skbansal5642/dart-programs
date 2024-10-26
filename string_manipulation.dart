@@ -4,6 +4,8 @@ void main() {
     print(contactenateStrings(str1, str2));
     print(getIdxOfNonRepChar("geeksforgeeks"));
     print(getIdxOfNonRepChar("aabbccc"));
+    countCharDigitsSp("Welcome to w3resource.com");
+    maximumNumberOfChars("Welcome to w3resource.com");
 }
 
 // Add 2 Strings
@@ -27,4 +29,47 @@ int getIdxOfNonRepChar(String str) {
         }
     }
     return -1;
+}
+
+// Count total numbers of chars, digits & special characters
+void countCharDigitsSp(String s1) {
+    int countChar = 0;
+    int countDigit = 0;
+    int countSpChar = 0;
+   
+   for(int idx = 0; idx < s1.length; idx++) {
+       int asciiVal = s1[idx].codeUnits[0];
+       if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122)) {
+           countChar++;
+       } else if (asciiVal >= 48 && asciiVal <= 57) {
+           countDigit++;
+       } else {
+           countSpChar++;
+       }
+   }
+   print("Alphabets: $countChar");
+   print("Digits: $countDigit");
+   print("Sp. Chars: $countSpChar");
+}
+
+// Void frequently occurred character & its frequency
+maximumNumberOfChars(String s1) {
+    Map<String, int> freq = {};
+    for (int idx = 0; idx < s1.length; idx++) {
+        if (freq.containsKey(s1[idx])) {
+            freq[s1[idx]] = freq[s1[idx]]! + 1;
+            
+        } else {
+            freq[s1[idx]] = 0;
+        }
+    }
+    int maxFreq = -1;
+    String char = '';
+    for (MapEntry mapEntry in freq.entries) {
+        if (mapEntry.value > maxFreq) {
+            maxFreq = mapEntry.value;
+            char = mapEntry.key;
+        }
+    }
+    print("Char: $char, frequency: $maxFreq");
 }
